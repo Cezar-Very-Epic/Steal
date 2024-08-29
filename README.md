@@ -1,0 +1,2 @@
+# Steal
+The stealing script
