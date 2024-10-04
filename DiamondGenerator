@@ -1,0 +1,404 @@
+local DraggableObject = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/refs/heads/main/DragModule"))()
+
+local Plr = game.Players.LocalPlayer
+
+local DiamondsValue = Plr.leaderstats["💎 Diamonds"]
+local DiamondsGui = Plr.PlayerGui.MainLeft.Left.Currency.Diamonds.Diamonds
+local NewDiamondsGui = DiamondsGui:Clone()
+local NewDiamondsValue = DiamondsValue:Clone()
+
+local TweenSerice = game:GetService("TweenService")
+local Info = TweenInfo.new(
+    20,
+    Enum.EasingStyle.Quint,
+    Enum.EasingDirection.Out
+)
+
+
+
+-- Guis create functions
+local GemSpawner = Instance.new("ScreenGui")
+GemSpawner.Name = "GemSpawner"
+GemSpawner.Parent = Plr.PlayerGui
+
+local function MakeUiStroke(Parent, Color, Thickness, ApplyStrokeMode, LineJoinMode)
+    local UiStroke = Instance.new("UIStroke")
+    UiStroke.Parent = Parent
+    UiStroke.Color = Color
+    UiStroke.Thickness = Thickness
+    UiStroke.ApplyStrokeMode = ApplyStrokeMode
+    UiStroke.LineJoinMode = LineJoinMode
+end
+
+local function CreateFirstMain()
+	-- Instances
+
+	local Main = Instance.new("Frame")
+	local UICorner = Instance.new("UICorner")
+	local Title = Instance.new("TextLabel")
+	local Amount = Instance.new("TextBox")
+	local UICorner_2 = Instance.new("UICorner")
+	local Generate = Instance.new("TextButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local Error = Instance.new("TextLabel")
+
+	-- Properties
+
+	Main.Name = "Main"
+	Main.Parent = GemSpawner
+	Main.BackgroundColor3 = Color3.new(0.266667, 0.266667, 0.266667)
+	Main.BorderColor3 = Color3.new(0, 0, 0)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.255865097, 0, 0.247395828, 0)
+	Main.Size = UDim2.new(0.488269806, 0, 0.50390625, 0)
+	Main.Visible = true
+
+	UICorner.Parent = Main
+	UICorner.CornerRadius = UDim.new(0.0599999987, 0)
+
+	Title.Name = "Title"
+	Title.Parent = Main
+	Title.BackgroundColor3 = Color3.new(1, 1, 1)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.new(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Size = UDim2.new(1, 0, 0.245478034, 0)
+	Title.Font = Enum.Font.DenkOne
+	Title.Text = "Diamond Generator"
+	Title.TextColor3 = Color3.new(1, 1, 1)
+	Title.TextScaled = true
+	Title.TextSize = 14
+	Title.TextWrapped = true
+
+	Amount.Name = "Amount"
+	Amount.Parent = Main
+	Amount.BackgroundColor3 = Color3.new(1, 1, 1)
+	Amount.BackgroundTransparency = 0.75
+	Amount.BorderColor3 = Color3.new(0, 0, 0)
+	Amount.BorderSizePixel = 0
+	Amount.Position = UDim2.new(0.205705702, 0, 0.31782946, 0)
+	Amount.Size = UDim2.new(0.588588595, 0, 0.248062015, 0)
+	Amount.Font = Enum.Font.DenkOne
+	Amount.PlaceholderText = "Enter the amount of diamonds to generate here!"
+	Amount.Text = ""
+	Amount.TextColor3 = Color3.new(0, 0, 0)
+	Amount.TextScaled = true
+	Amount.TextSize = 14
+	Amount.TextWrapped = true
+
+	UICorner_2.Parent = Amount
+	UICorner_2.CornerRadius = UDim.new(0.100000001, 0)
+
+	Generate.Name = "Generate"
+	Generate.Parent = Main
+	Generate.BackgroundColor3 = Color3.new(0.262745, 0.262745, 0.262745)
+	Generate.BorderColor3 = Color3.new(0, 0, 0)
+	Generate.BorderSizePixel = 0
+	Generate.Position = UDim2.new(0.0480480492, 0, 0.648578823, 0)
+	Generate.Size = UDim2.new(0.902402401, 0, 0.302325577, 0)
+	Generate.Font = Enum.Font.DenkOne
+	Generate.Text = "Generate Diamonds"
+	Generate.TextColor3 = Color3.new(1, 1, 1)
+	Generate.TextScaled = true
+	Generate.TextSize = 14
+	Generate.TextWrapped = true
+
+	UICorner_3.Parent = Generate
+	UICorner_3.CornerRadius = UDim.new(0.100000001, 0)
+
+	Error.Name = "Error"
+	Error.Parent = Main
+	Error.BackgroundColor3 = Color3.new(1, 1, 1)
+	Error.BackgroundTransparency = 1
+	Error.BorderColor3 = Color3.new(0, 0, 0)
+	Error.BorderSizePixel = 0
+	Error.Position = UDim2.new(0.0480480492, 0, 1, 0)
+	Error.Size = UDim2.new(0.906906903, 0, 0.129198968, 0)
+	Error.Visible = false
+	Error.Font = Enum.Font.DenkOne
+	Error.Text = "Please enter a valid amount of diamonds!"
+	Error.TextColor3 = Color3.new(1, 0, 0)
+	Error.TextScaled = true
+	Error.TextSize = 14
+	Error.TextWrapped = true
+
+    MakeUiStroke(Main, Color3.fromRGB(34, 34, 34),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Generate, Color3.fromRGB(49, 49, 49),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Amount, Color3.fromRGB(90, 90, 90),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Error, Color3.fromRGB(255, 255, 255), 5, Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+end
+
+local function CreateSecondMain()
+    -- Instances
+    
+    local Main2 = Instance.new("Frame")
+    local Title = Instance.new("TextLabel")
+    local Amount = Instance.new("TextBox")
+    local Generate = Instance.new("TextButton")
+    local Error = Instance.new("TextLabel")
+
+    -- Properties
+
+    Main2.Name = "Main"
+    Main2.Parent = GemSpawner
+    Main2.BackgroundColor3 = Color3.new(0, 0, 0)
+    Main2.BorderColor3 = Color3.new(0, 0, 0)
+    Main2.BorderSizePixel = 0
+    Main2.Position = UDim2.new(0.10190618, 0, 0.24218744, 0)
+    Main2.Size = UDim2.new(0.65335393, 0, 0.549074769, 0)
+    Main2.Visible = true
+
+    Title.Name = "Title"
+    Title.Parent = Main2
+    Title.BackgroundColor3 = Color3.new(1, 1, 1)
+    Title.BackgroundTransparency = 1
+    Title.BorderColor3 = Color3.new(0, 0, 0)
+    Title.BorderSizePixel = 0
+    Title.Position = UDim2.new(-0.000879770436, 0, -0.0255684499, 0)
+    Title.Size = UDim2.new(1, 0, 0.245478034, 0)
+    Title.Font = Enum.Font.DenkOne
+    Title.Text = "Diamond Generator v3.0"
+    Title.TextColor3 = Color3.new(1, 1, 1)
+    Title.TextScaled = true
+    Title.TextSize = 14
+    Title.TextWrapped = true
+
+    Amount.Name = "Amount"
+    Amount.Parent = Main2
+    Amount.BackgroundColor3 = Color3.new(0.188235, 0.188235, 0.188235)
+    Amount.BorderColor3 = Color3.new(0, 0, 0)
+    Amount.BorderSizePixel = 0
+    Amount.Position = UDim2.new(0.0473368391, 0, 0.309745312, 0)
+    Amount.Size = UDim2.new(0.518437684, 0, 0.531549633, 0)
+    Amount.Font = Enum.Font.DenkOne
+    Amount.PlaceholderText = "Enter the amount of diamonds to generate here!"
+    Amount.Text = ""
+    Amount.TextColor3 = Color3.new(0, 0, 0)
+    Amount.TextScaled = true
+    Amount.TextSize = 14
+    Amount.TextWrapped = true
+
+    Generate.Name = "Generate"
+    Generate.Parent = Main2
+    Generate.BackgroundColor3 = Color3.new(0.0352941, 0.262745, 0)
+    Generate.BorderColor3 = Color3.new(0, 0, 0)
+    Generate.BorderSizePixel = 0
+    Generate.Position = UDim2.new(0.627063334, 0, 0.334291846, 0)
+    Generate.Size = UDim2.new(0.318422675, 0, 0.48387754, 0)
+    Generate.Font = Enum.Font.DenkOne
+    Generate.Text = "Generate The Diamonds"
+    Generate.TextColor3 = Color3.new(1, 1, 1)
+    Generate.TextScaled = true
+    Generate.TextSize = 14
+    Generate.TextWrapped = true
+
+    Error.Name = "Error"
+    Error.Parent = Main2
+    Error.BackgroundColor3 = Color3.new(1, 1, 1)
+    Error.BackgroundTransparency = 1
+    Error.BorderColor3 = Color3.new(0, 0, 0)
+    Error.BorderSizePixel = 0
+    Error.Position = UDim2.new(0.0480480492, 0, 1, 0)
+    Error.Size = UDim2.new(0.906906903, 0, 0.129198968, 0)
+    Error.Visible = false
+    Error.Font = Enum.Font.DenkOne
+    Error.Text = "Please enter a valid amount of diamonds!"
+    Error.TextColor3 = Color3.new(1, 0, 0)
+    Error.TextScaled = true
+    Error.TextSize = 14
+    Error.TextWrapped = true
+
+    MakeUiStroke(Main2, Color3.fromRGB(34, 34, 34),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Miter)
+    MakeUiStroke(Generate, Color3.fromRGB(4, 106, 0),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Miter)
+    MakeUiStroke(Amount, Color3.fromRGB(76, 76, 760),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Miter)
+    MakeUiStroke(Error, Color3.fromRGB(255, 255, 255), 5, Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+end
+
+local function CreateThirdMain()
+	-- Instances
+
+	local Main3 = Instance.new("Frame")
+	local UICorner = Instance.new("UICorner")
+	local Title = Instance.new("TextLabel")
+	local Amount = Instance.new("TextBox")
+	local UICorner_2 = Instance.new("UICorner")
+	local Generate = Instance.new("TextButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local Error = Instance.new("TextLabel")
+	local Background = Instance.new("ImageLabel")
+
+	-- Properties
+
+	Main3.Name = "Main"
+	Main3.Parent = GemSpawner
+	Main3.BackgroundColor3 = Color3.new(0, 1, 1)
+	Main3.BorderColor3 = Color3.new(0, 0, 0)
+	Main3.BorderSizePixel = 0
+	Main3.Position = UDim2.new(0.244134873, 0, 0.227864578, 0)
+	Main3.Size = UDim2.new(0.511545181, 0, 0.543866336, 0)
+
+	UICorner.Parent = Main3
+	UICorner.CornerRadius = UDim.new(0.0599999987, 0)
+
+	Title.Name = "Title"
+	Title.Parent = Main3
+	Title.BackgroundColor3 = Color3.new(1, 1, 1)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.new(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Size = UDim2.new(1, 0, 0.245478034, 0)
+	Title.Font = Enum.Font.FredokaOne
+	Title.Text = "Diamond Generator"
+	Title.TextColor3 = Color3.new(1, 1, 1)
+	Title.TextScaled = true
+	Title.TextSize = 14
+	Title.TextWrapped = true
+
+	Amount.Name = "Amount"
+	Amount.Parent = Main3
+	Amount.BackgroundColor3 = Color3.new(1, 0.933333, 0)
+	Amount.BorderColor3 = Color3.new(0, 0, 0)
+	Amount.BorderSizePixel = 0
+	Amount.Position = UDim2.new(0.0540540554, 0, 0.32041344, 0)
+	Amount.Size = UDim2.new(0.889515758, 0, 0.248062015, 0)
+	Amount.Font = Enum.Font.DenkOne
+	Amount.PlaceholderColor3 = Color3.new(1, 1, 1)
+	Amount.PlaceholderText = "Eneter the amount of diamonds"
+	Amount.Text = ""
+	Amount.TextColor3 = Color3.new(0, 0, 0)
+	Amount.TextScaled = true
+	Amount.TextSize = 14
+	Amount.TextWrapped = true
+
+	UICorner_2.Parent = Amount
+	UICorner_2.CornerRadius = UDim.new(0.100000001, 0)
+
+	Generate.Name = "Generate"
+	Generate.Parent = Main3
+	Generate.BackgroundColor3 = Color3.new(0, 1, 0)
+	Generate.BorderColor3 = Color3.new(0, 0, 0)
+	Generate.BorderSizePixel = 0
+	Generate.Position = UDim2.new(0.0480480492, 0, 0.648578823, 0)
+	Generate.Size = UDim2.new(0.902402401, 0, 0.302325577, 0)
+	Generate.Font = Enum.Font.FredokaOne
+	Generate.Text = "Generate"
+	Generate.TextColor3 = Color3.new(1, 1, 1)
+	Generate.TextScaled = true
+	Generate.TextSize = 14
+	Generate.TextWrapped = true
+
+	UICorner_3.Parent = Generate
+	UICorner_3.CornerRadius = UDim.new(0.100000001, 0)
+
+	Error.Name = "Error"
+	Error.Parent = Main3
+	Error.BackgroundColor3 = Color3.new(1, 1, 1)
+	Error.BackgroundTransparency = 1
+	Error.BorderColor3 = Color3.new(0, 0, 0)
+	Error.BorderSizePixel = 0
+	Error.Position = UDim2.new(0.0480480492, 0, 1, 0)
+	Error.Size = UDim2.new(0.906906903, 0, 0.129198968, 0)
+	Error.Visible = false
+	Error.Font = Enum.Font.FredokaOne
+	Error.Text = "Please enter a valid amount of diamonds!"
+	Error.TextColor3 = Color3.new(1, 0, 0)
+	Error.TextScaled = true
+	Error.TextSize = 14
+	Error.TextWrapped = true
+
+	Background.Name = "Background"
+	Background.Parent = Main3
+	Background.BackgroundColor3 = Color3.new(1, 1, 1)
+	Background.BackgroundTransparency = 1
+	Background.BorderColor3 = Color3.new(0, 0, 0)
+	Background.BorderSizePixel = 0
+	Background.Size = UDim2.new(1, 0, 1, 0)
+	Background.ZIndex = -1
+	Background.Image = "http://www.roblox.com/asset/?id=11676151428"
+	Background.ImageColor3 = Color3.new(0, 0.788235, 0.8)
+	Background.ScaleType = Enum.ScaleType.Crop
+	Background.SliceCenter = Rect.new(20, 20, 50, 50)
+
+    MakeUiStroke(Main3, Color3.fromRGB(0, 134, 136),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Amount, Color3.fromRGB(166, 152, 0),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Amount, Color3.fromRGB(166, 152, 0),5,Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+    MakeUiStroke(Generate, Color3.fromRGB(4, 129, 0),10,Enum.ApplyStrokeMode.Border,Enum.LineJoinMode.Round)
+    MakeUiStroke(Generate, Color3.fromRGB(4, 129, 0),5,Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+    MakeUiStroke(Title, Color3.fromRGB(0, 134, 136),5,Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+    MakeUiStroke(Error, Color3.fromRGB(255, 255, 255), 5, Enum.ApplyStrokeMode.Contextual,Enum.LineJoinMode.Round)
+end
+
+local function formatNumber(number)
+    local number = math.floor(number)
+    local suffixes = {"", "k", "m", "b", "t"}
+    local suffixIndex = 1
+    
+    while number >= 1000 do
+        number = number / 1000
+        suffixIndex = suffixIndex + 1
+    end
+    
+    if number == math.floor(number) then
+        return string.format("%d%s", number, suffixes[suffixIndex])
+    else
+        return string.format("%.1f%s", number, suffixes[suffixIndex])
+    end
+end
+
+
+local function HandleGui(IGNOREME)
+    local Main = GemSpawner.Main
+    local Amount = Main.Amount
+    local Button = Main.Generate
+
+    local AmountToGenerate = 0
+
+    local FrameDrag = DraggableObject.new(Main)
+    FrameDrag:Enable()
+
+    Amount:GetPropertyChangedSignal("Text"):Connect(function()
+        local newText = string.gsub(Amount.Text, "%D", "") -- only numbers
+	    if newText ~= Amount.Text then
+	    	Amount.Text = newText
+	    end
+        -- Main
+        local NumberText = tonumber(Amount.Text)
+        if NumberText then
+            AmountToGenerate = NumberText
+        end
+    end)
+
+    Button.Activated:Connect(function()
+        local GenerateTween = TweenSerice:Create(IGNOREME, Info, {Value = AmountToGenerate})
+        GenerateTween:Play()
+        GenerateTween.Completed:Wait()
+    end)
+end
+
+-- RunTime
+local IGNOREME = Instance.new("IntValue")
+IGNOREME.Name = "ut487ewtTEWTDSAG"
+IGNOREME.Value = 0
+IGNOREME.Parent = workspace
+
+NewDiamondsValue.Parent = DiamondsValue.Parent
+NewDiamondsGui.Parent = DiamondsGui.Parent
+
+NewDiamondsValue.Value = DiamondsValue.Value + 1
+DiamondsValue:Destroy()
+DiamondsGui:Destroy()
+
+IGNOREME:GetPropertyChangedSignal("Value"):Connect(function()
+    NewDiamondsValue.Value = IGNOREME.Value
+    NewDiamondsGui.Amount.Text = formatNumber(IGNOREME.Value)
+end)
+
+if GuiToCreate == 1 then
+    CreateFirstMain()
+elseif GuiToCreate == 2 then
+    CreateSecondMain()
+else
+    CreateThirdMain()
+end
+
+HandleGui(IGNOREME)
