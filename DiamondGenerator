@@ -265,7 +265,7 @@ local function CreateThirdMain()
 	Amount.PlaceholderColor3 = Color3.new(1, 1, 1)
 	Amount.PlaceholderText = "Eneter the amount of diamonds"
 	Amount.Text = ""
-	Amount.TextColor3 = Color3.new(0, 0, 0)
+	Amount.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Amount.TextScaled = true
 	Amount.TextSize = 14
 	Amount.TextWrapped = true
