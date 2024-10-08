@@ -50,7 +50,7 @@ local function CreateFirstMain()
 	Main.BorderColor3 = Color3.new(0, 0, 0)
 	Main.BorderSizePixel = 0
 	Main.Position = UDim2.new(0.255865097, 0, 0.247395828, 0)
-	Main.Size = UDim2.new(0.488269806, 0, 0.50390625, 0)
+	Main.Size = UDim2.new(0.375, 0,0.391, 0)
 	Main.Visible = true
 
 	UICorner.Parent = Main
@@ -145,7 +145,7 @@ local function CreateSecondMain()
     Main2.BorderColor3 = Color3.new(0, 0, 0)
     Main2.BorderSizePixel = 0
     Main2.Position = UDim2.new(0.10190618, 0, 0.24218744, 0)
-    Main2.Size = UDim2.new(0.65335393, 0, 0.549074769, 0)
+    Main2.Size = UDim2.new(0.429, 0,0.417, 0)
     Main2.Visible = true
 
     Title.Name = "Title"
@@ -235,7 +235,7 @@ local function CreateThirdMain()
 	Main3.BorderColor3 = Color3.new(0, 0, 0)
 	Main3.BorderSizePixel = 0
 	Main3.Position = UDim2.new(0.244134873, 0, 0.227864578, 0)
-	Main3.Size = UDim2.new(0.511545181, 0, 0.543866336, 0)
+	Main3.Size = UDim2.new(0.375, 0,0.391, 0)
 
 	UICorner.Parent = Main3
 	UICorner.CornerRadius = UDim.new(0.0599999987, 0)
@@ -341,7 +341,7 @@ local function formatNumber(number)
     if number == math.floor(number) then
         return string.format("%d%s", number, suffixes[suffixIndex])
     else
-        return string.format("%.1f%s", number, suffixes[suffixIndex])
+        return string.format("%.0f%s", number, suffixes[suffixIndex])
     end
 end
 
@@ -383,7 +383,6 @@ IGNOREME.Parent = workspace
 
 NewDiamondsValue.Parent = DiamondsValue.Parent
 NewDiamondsGui.Parent = DiamondsGui.Parent
-
 NewDiamondsValue.Value = DiamondsValue.Value + 1
 DiamondsValue:Destroy()
 DiamondsGui:Destroy()
