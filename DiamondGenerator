@@ -1,3 +1,13 @@
+--[[ how to use:
+
+GuiToCreate = 1
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/refs/heads/main/DiamondGenerator"))()
+
+guis: 1,2,3
+]]
+
+local GuiToCreate = GuiToCreate or false
+if GuiToCreate == false then return end
 local DraggableObject = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cezar-Very-Epic/Steal/refs/heads/main/DragModule"))()
 
 local Plr = game.Players.LocalPlayer
